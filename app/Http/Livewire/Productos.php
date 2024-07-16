@@ -25,6 +25,7 @@ class Productos extends Component
             return ModelsProductos::
             orWhere('nombre', 'LIKE', '%'.$this->search.'%')
             ->orWhere('precio', 'LIKE', '%'.$this->search.'%')
+            ->orWhere('stock', 'LIKE', '%'.$this->search.'%')
             ->paginate(3);
         } 
     }
