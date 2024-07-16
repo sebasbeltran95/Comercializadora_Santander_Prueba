@@ -16,6 +16,7 @@ class Productos extends Model
 
     public $fillable = [
         'id',
+        'codigo_producto',
         'nombre',
         'precio',
         'stock',

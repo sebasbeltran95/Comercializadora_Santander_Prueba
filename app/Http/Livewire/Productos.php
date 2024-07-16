@@ -46,8 +46,9 @@ class Productos extends Component
             'stock.required' => 'El campo Stock es obligatorio',
             'stock.string' => 'El campo Stock recibe solo numeros enteros',
         ]);
-       
+        
         $tipo = new ModelsProductos();
+        $tipo->codigo_producto = rand();
         $tipo->nombre = $this->nombre;
         $tipo->precio = $this->precio;
         $tipo->stock = $this->stock;

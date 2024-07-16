@@ -13,7 +13,7 @@
                <div class="table-responsive">
                    <table class="table  table-hover table-bordered">
                        <thead>
-                           <th colspan="5">
+                           <th colspan="6">
                                <div class="input-group input-group-sm">
                                    <input type="text" class="form-control"
                                    placeholder="Ingrese el campo que desea buscar"
@@ -21,6 +21,7 @@
                                </div>
                            </th>
                            <tr>
+                               <th class="text-center">Codigo Producto</th>
                                <th class="text-center">Nombre</th>
                                <th class="text-center">Precio</th>
                                <th class="text-center">Stock</th>
@@ -31,6 +32,7 @@
                        <tbody>
                            @forelse ($this->productos as $p)
                                <tr>
+                                   <td class="text-center">{{ $p->codigo_producto }}</td>
                                    <td class="text-center">{{ $p->nombre }}</td>
                                    <td class="text-center">${{ number_format($p->precio) }}</td>
                                    <td class="text-center">{{ $p->stock }}</td>
@@ -48,7 +50,7 @@
                                </tr>
                            @empty
                                <tr>
-                                   <td colspan="5" class="text-center">No hay registros</td>
+                                   <td colspan="6" class="text-center">No hay registros</td>
                                </tr>
                            @endforelse
                        </tbody>
