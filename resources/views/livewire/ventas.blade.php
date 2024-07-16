@@ -32,12 +32,12 @@
                        <tbody>
                            @forelse ($this->ventas as $p)
                                <tr>
-                                   <td class="text-center">{{ $p->id_producto }}</td>
-                                   <td class="text-center">{{ $p->id_cliente }}</td>
-                                   <td class="text-center">{{ $p->n_stock }}</td>
-                                   <td class="text-center">{{ $p->id_des }}%</td>
-                                   <td class="text-center">{{ $p->created_at }}</td>
-                                   <td class="d-flex justify-content-center">
+                                    <td class="text-center">{{ $product::find($p->id_producto)->nombre}}</td>
+                                    <td class="text-center">{{ $clientt::find($p->id_cliente)->nombre_completo}}</td>
+                                    <td class="text-center">{{ $p->n_stock }}</td>
+                                    <td class="text-center">{{ $descuentt::find($p->id_des)->descuento}}%</td>
+                                    <td class="text-center">{{ $p->created_at }}</td>
+                                    <td class="d-flex justify-content-center">
                                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
                                            <button type="button" class="btn btn-sm btn-warning"
                                                wire:click="datacliente({{ $p }})" data-bs-toggle="modal"
@@ -46,7 +46,7 @@
                                                wire:click="$emit('deletePost',{{$p->id}})"><i
                                                    class="fas fa-trash-alt"></i></button>
                                        </div>
-                                   </td>
+                                    </td>
                                </tr>
                            @empty
                                <tr>
@@ -142,18 +142,40 @@
                                    <h4 class="modal-title">Editar Producto</h4>
                                </div>
                                <div class="modal-body">
-                                     <div class="form-group mb-2">
-                                         <label>Nombre Producto</label>
-                                         <input type="text" class="form-control" wire:model="nombrex">
-                                     </div>
-                                     <div class="form-group mb-2">
-                                         <label>Precio</label>
-                                         <input type="number" class="form-control" wire:model="preciox">
-                                     </div>
-                                     <div class="form-group mb-2">
-                                         <label>Stock</label>
-                                         <input type="number" class="form-control" wire:model="stockx">
-                                     </div>
+                                    <div class="form-group">
+                                        <label>Producto</label>
+                                        <select class="form-select"
+                                            wire:model="id_productox">
+                                            <option value="">Seleccione una opción...</option>
+                                            @foreach ($produc as $pr)
+                                                <option value="{{ $pr->id }}">{{ $pr->nombre }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Cliente</label>
+                                        <select class="form-select"
+                                            wire:model="id_clientex">
+                                            <option value="">Seleccione una opción...</option>
+                                            @foreach ($client as $cl)
+                                                <option value="{{ $cl->id }}">{{ $cl->nombre_completo }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group mb-2">
+                                        <label>Stock</label>
+                                        <input type="number" class="form-control" wire:model="n_stockx">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Descuento</label>
+                                        <select class="form-select"
+                                            wire:model="id_desx">
+                                            <option value="">Seleccione una opción...</option>
+                                            @foreach ($descuent as $des)
+                                                <option value="{{ $des->id }}">{{ $des->descuento }}%</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                </div>
                                <div class="modal-footer">
                                    <button type="submit" class="btn btn-primary" wire:click="actualizar">Editar
