@@ -62,7 +62,7 @@ class Ventas extends Component
                 //valor sin descuento
                 $valorsin = $con->precio * $this->n_stock;
                 //descuento
-                $ddes = $valorsin * (10 / 100);
+                $ddes = $valorsin * ($tipo->descuento / 100);
                 //valor con el descuento
                 $tipo->valor_total = $valorsin - $ddes;
                 $tipo->save();
