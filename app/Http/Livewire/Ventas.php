@@ -72,33 +72,7 @@ class Ventas extends Component
             $this->emit('ok', $msj);
         }
     }
-
-    public function datacliente($obj)
-    {
-        $this->idx = $obj['id'];
-        $this->id_productox = $obj['id_producto'];
-        $this->id_clientex = $obj['id_cliente'];
-        $this->n_stockx = $obj['n_stock'];
-        $this->id_desx = $obj['id_des'];
-    }
-
-    public function actualizar()
-    {
-        $data = ModelsVentas::find($this->idx);
-        $data->id_producto = $this->id_productox;
-        $data->id_cliente = $this->id_clientex;
-        $data->n_stock = $this->n_stockx;
-        $data->id_des = $this->id_desx;
-        $data->save();
-        $msj = ['!Actualizado!', 'Se actualizo la Venta', 'success'];
-        $this->emit('ok', $msj);
-    }
-
-    public function delete($post)
-    {
-        ModelsVentas::where('id',$post)->first()->delete();
-    }
-
+    
     public function render()
     {
         $this->produc =  Productos::all();

@@ -13,7 +13,7 @@
                <div class="table-responsive">
                    <table class="table  table-hover table-bordered">
                        <thead>
-                           <th colspan="6">
+                           <th colspan="5">
                                <div class="input-group input-group-sm">
                                    <input type="text" class="form-control"
                                    placeholder="Ingrese el No de Stock"
@@ -26,7 +26,6 @@
                                <th class="text-center">Stock</th>
                                <th class="text-center">Descuento</th>
                                <th class="text-center">Fecha Ingreso</th>
-                               <th class="text-center">Acciones</th>
                            </tr>
                        </thead>
                        <tbody>
@@ -37,20 +36,10 @@
                                     <td class="text-center">{{ $p->n_stock }}</td>
                                     <td class="text-center">{{ $descuentt::find($p->id_des)->descuento}}%</td>
                                     <td class="text-center">{{ $p->created_at }}</td>
-                                    <td class="d-flex justify-content-center">
-                                       <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                           <button type="button" class="btn btn-sm btn-warning"
-                                               wire:click="datacliente({{ $p }})" data-bs-toggle="modal"
-                                               data-bs-target="#Modaleditar"><i class="fas fa-user-edit"></i></button>
-                                           <button type="submit" class="btn btn-sm btn-danger"
-                                               wire:click="$emit('deletePost',{{$p->id}})"><i
-                                                   class="fas fa-trash-alt"></i></button>
-                                       </div>
-                                    </td>
                                </tr>
                            @empty
                                <tr>
-                                   <td colspan="6" class="text-center">No hay registros</td>
+                                   <td colspan="5" class="text-center">No hay registros</td>
                                </tr>
                            @endforelse
                        </tbody>
@@ -129,67 +118,6 @@
            </div>
        </div>
        {{-- Fin modal crear Cliente --}}
- 
- 
-       {{--  editar   --}}
-       <div class="container-fluid">
-           <div class="row">
-               <div class="col-md-12">
-                   <div class="modal fade" id="Modaleditar" tabindex="-1" wire:ignore.self>
-                       <div class="modal-dialog">
-                           <div class="modal-content">
-                               <div class="modal-header">
-                                   <h4 class="modal-title">Editar Producto</h4>
-                               </div>
-                               <div class="modal-body">
-                                    <div class="form-group">
-                                        <label>Producto</label>
-                                        <select class="form-select"
-                                            wire:model="id_productox">
-                                            <option value="">Seleccione una opción...</option>
-                                            @foreach ($produc as $pr)
-                                                <option value="{{ $pr->id }}">{{ $pr->nombre }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Cliente</label>
-                                        <select class="form-select"
-                                            wire:model="id_clientex">
-                                            <option value="">Seleccione una opción...</option>
-                                            @foreach ($client as $cl)
-                                                <option value="{{ $cl->id }}">{{ $cl->nombre_completo }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="form-group mb-2">
-                                        <label>Stock</label>
-                                        <input type="number" class="form-control" wire:model="n_stockx">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Descuento</label>
-                                        <select class="form-select"
-                                            wire:model="id_desx">
-                                            <option value="">Seleccione una opción...</option>
-                                            @foreach ($descuent as $des)
-                                                <option value="{{ $des->id }}">{{ $des->descuento }}%</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                               </div>
-                               <div class="modal-footer">
-                                   <button type="submit" class="btn btn-primary" wire:click="actualizar">Editar
-                                       Producto</button>
-                                   <button type="button" class="btn btn-danger"
-                                       data-bs-dismiss="modal">Cerrar</button>
-                               </div>
-                           </div>
-                       </div>
-                   </div>
-               </div>
-           </div>
-       </div>
-       {{--  editar   --}}
 </div>
 @push('js')
 <script>
