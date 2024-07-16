@@ -14,6 +14,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', Productos::class)->name('/');
 Route::get('/clientes', Clientes::class)->name('clientes');
-Route::get('/descuentos', Descuentos::class)->name('descuentos');
 Route::get('/ventas', Ventas::class)->name('ventas');
 

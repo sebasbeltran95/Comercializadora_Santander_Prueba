@@ -27,13 +27,6 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link @if (Request::is('descuentos')) active @endif"
-                                href="{{ route('descuentos') }}">
-                                <i class="fas fa-dollar-sign"></i>
-                                Descuentos
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link @if (Request::is('ventas')) active @endif"
                                 href="{{ route('ventas') }}">
                                 <i class="fas fa-dollar-sign"></i>

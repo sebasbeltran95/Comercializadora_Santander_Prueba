@@ -34,7 +34,7 @@
                                     <td class="text-center">{{ $product::find($p->id_producto)->nombre}}</td>
                                     <td class="text-center">{{ $clientt::find($p->id_cliente)->nombre_completo}}</td>
                                     <td class="text-center">{{ $p->n_stock }}</td>
-                                    <td class="text-center">{{ $descuentt::find($p->id_des)->descuento}}%</td>
+                                    <td class="text-center">{{ $p->descuento }}%</td>
                                     <td class="text-center">{{ $p->created_at }}</td>
                                </tr>
                            @empty
@@ -94,21 +94,6 @@
                                  @error('n_stock') {{ $message }} @enderror
                              </i>
                          </div>
-                         <div class="form-group">
-                            <label class="@error('id_des') text-danger @enderror">Descuento</label>
-                            <select class="form-select @error('id_des') text-danger @enderror"
-                                wire:model="id_des">
-                                <option value="">Seleccione una opción...</option>
-                                @foreach ($descuent as $des)
-                                    <option value="{{ $des->id }}">{{ $des->descuento }}%</option>
-                                @endforeach
-                            </select>
-                            <i class="text-danger">
-                                @error('id_des')
-                                    {{ $message }}
-                                @enderror
-                            </i>
-                        </div>
                    </div>
                    <div class="modal-footer">
                        <button type="submit" class="btn btn-primary" wire:click='crear'>Registrar Producto</button>

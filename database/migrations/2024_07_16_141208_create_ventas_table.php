@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer('id_producto');
             $table->integer('id_cliente');
             $table->integer('n_stock');
-            $table->integer('id_des');
+            $table->integer('descuento');
             $table->timestamps();
         });
     }

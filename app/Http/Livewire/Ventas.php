@@ -15,8 +15,8 @@ class Ventas extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     public $search;
-    public $id_producto, $id_cliente, $n_stock, $id_des;
-    public $idx, $id_productox, $id_clientex, $n_stockx, $id_desx;
+    public $id_producto, $id_cliente, $n_stock;
+    public $idx, $id_productox, $id_clientex, $n_stockx;
     public $produc, $product, $client, $clientt, $descuent,$descuentt;
 
     protected $listeners = ['render', 'delete'];
@@ -38,8 +38,7 @@ class Ventas extends Component
             'id_producto' => 'required|numeric',
             'id_cliente' => 'required|numeric',
             'n_stock' => 'required|numeric',
-            'id_des' => 'required|numeric',
-
+            'n_stock' => 'required|numeric',
         ],[
             'id_producto.required' => 'El campo Producto es obligatorio',
             'id_producto.string' => 'El campo Producto  recibe solonumeros enteros',
@@ -47,8 +46,6 @@ class Ventas extends Component
             'id_cliente.string' => 'El campo Cliente recibe solo numeros enteros',
             'n_stock.required' => 'El campo Stock es obligatorio',
             'n_stock.string' => 'El campo Stock recibe solo numeros enteros',
-            'id_des.required' => 'El campo Descuento es obligatorio',
-            'id_des.string' => 'El campo Descuento recibe solo numeros enteros',
         ]);
        
         $con = Productos::find($this->id_producto);
@@ -58,7 +55,6 @@ class Ventas extends Component
             $tipo->id_producto = $this->id_producto;
             $tipo->id_cliente = $this->id_cliente;
             $tipo->n_stock = $this->n_stock;
-            $tipo->id_des = $this->id_des;
             $tipo->save();
             $this->reset();
             $msj = ['!Registrado!', 'Se registro la Venta', 'success'];
@@ -79,8 +75,6 @@ class Ventas extends Component
         $this->product = Productos::class;
         $this->client = Clientes::all();
         $this->clientt = Clientes::class;
-        $this->descuent = Descuentos::all();
-        $this->descuentt = Descuentos::class;
         return view('livewire.ventas')->extends('layouts.plantilla_back')->section('contenido');
     }
 }
