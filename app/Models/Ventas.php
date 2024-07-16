@@ -20,6 +20,8 @@ class Ventas extends Model
         'id_cliente',
         'n_stock',
         'descuento',
+        'valor_unitario',
+        'valor_total',
         'created_at',
         'updated_at'
     ];

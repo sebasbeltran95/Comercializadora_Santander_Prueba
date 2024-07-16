@@ -13,7 +13,7 @@
                <div class="table-responsive">
                    <table class="table  table-hover table-bordered">
                        <thead>
-                           <th colspan="5">
+                           <th colspan="7">
                                <div class="input-group input-group-sm">
                                    <input type="text" class="form-control"
                                    placeholder="Ingrese el No de Stock"
@@ -25,6 +25,8 @@
                                <th class="text-center">Cliente</th>
                                <th class="text-center">Stock</th>
                                <th class="text-center">Descuento</th>
+                               <th class="text-center">Valor Unitario</th>
+                               <th class="text-center">Valor Total</th>
                                <th class="text-center">Fecha Ingreso</th>
                            </tr>
                        </thead>
@@ -35,11 +37,13 @@
                                     <td class="text-center">{{ $clientt::find($p->id_cliente)->nombre_completo}}</td>
                                     <td class="text-center">{{ $p->n_stock }}</td>
                                     <td class="text-center">{{ $p->descuento }}%</td>
+                                    <td class="text-center">{{ number_format($p->valor_unitario) }}</td>
+                                    <td class="text-center">{{ number_format($p->valor_total) }}</td>
                                     <td class="text-center">{{ $p->created_at }}</td>
                                </tr>
                            @empty
                                <tr>
-                                   <td colspan="5" class="text-center">No hay registros</td>
+                                   <td colspan="7" class="text-center">No hay registros</td>
                                </tr>
                            @endforelse
                        </tbody>

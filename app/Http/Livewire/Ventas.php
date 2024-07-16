@@ -50,19 +50,46 @@ class Ventas extends Component
        
         $con = Productos::find($this->id_producto);
         $det = $con->stock -  $this->n_stock;
+        
         if($det >= 0){
-            $tipo = new ModelsVentas();
-            $tipo->id_producto = $this->id_producto;
-            $tipo->id_cliente = $this->id_cliente;
-            $tipo->n_stock = $this->n_stock;
-            $tipo->save();
-            $this->reset();
-            $msj = ['!Registrado!', 'Se registro la Venta', 'success'];
-            $this->emit('ok', $msj);
-
-            $d = Productos::find($tipo->id_producto);
-            $d->stock = $det;
-            $d->save();
+            if($this->n_stock > 5){
+                $tipo = new ModelsVentas();
+                $tipo->id_producto = $this->id_producto;
+                $tipo->id_cliente = $this->id_cliente;
+                $tipo->n_stock = $this->n_stock;
+                $tipo->descuento = 10;
+                $tipo->valor_unitario = $con->precio;
+                //valor sin descuento
+                $valorsin = $con->precio * $this->n_stock;
+                //descuento
+                $ddes = $valorsin * (10 / 100);
+                //valor con el descuento
+                $tipo->valor_total = $valorsin - $ddes;
+                $tipo->save();
+                $this->reset();
+                $msj = ['!Registrado!', 'Se registro la Venta', 'success'];
+                $this->emit('ok', $msj);
+    
+                $d = Productos::find($tipo->id_producto);
+                $d->stock = $det;
+                $d->save();
+            } else {
+                $tipo = new ModelsVentas();
+                $tipo->id_producto = $this->id_producto;
+                $tipo->id_cliente = $this->id_cliente;
+                $tipo->n_stock = $this->n_stock;
+                $tipo->descuento = 0;
+                $tipo->valor_unitario = $con->precio;
+                $tipo->valor_total = $con->precio * $this->n_stock;
+                $tipo->save();
+                $this->reset();
+                $msj = ['!Registrado!', 'Se registro la Venta', 'success'];
+                $this->emit('ok', $msj);
+    
+                $d = Productos::find($tipo->id_producto);
+                $d->stock = $det;
+                $d->save();
+            }
         } else {
             $msj = ['!Cancelado!', 'No hay existencia', 'error'];
             $this->emit('ok', $msj);

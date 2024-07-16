@@ -17,6 +17,8 @@ return new class extends Migration
             $table->integer('id_cliente');
             $table->integer('n_stock');
             $table->integer('descuento');
+            $table->integer('valor_unitario');
+            $table->integer('valor_total');
             $table->timestamps();
         });
     }
